@@ -62,22 +62,22 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating a big">
-              A
+            <div class="rating d big">
+              D
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">10</span><small> lines of codes</small></div>
-              <div><span class="metric">1</span><small> methods</small></div>
+              <div><span class="metric">63</span><small> lines of codes</small></div>
+              <div><span class="metric">6</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">1.0</span><small> complexity/method</small></div>
+              <div><span class="metric">18.8</span><small> complexity/method</small></div>
               <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">1.0</span><small> complexity</small></div>
-              <div><span class="metric">0</span><small> duplications</small></div>
+              <div><span class="metric">112.82</span><small> complexity</small></div>
+              <div><span class="metric">72</span><small> duplications</small></div>
             </div>
           </div>
         </div>
@@ -88,8 +88,8 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                1
-                smell
+                11
+                smells
               </a>
             </li>
           </ul>
@@ -101,12 +101,65 @@
 
 # This the Class Frame where we store
 class Frame
-  attr_accessor :rolls<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Frame#rolls is a writable attribute</span>          </div>  </li></ol>
+  attr_accessor :frame_scores, :rolls<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Frame#frame_scores is a writable attribute</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Attribute.md" target="_blank"><b>Attribute</b></a>        </span>      </div>      <span>Frame#rolls is a writable attribute</span>          </div>  </li></ol>
 
-  def initialize(rolls)
-    @rolls = rolls
+  def initialize
+    @frame_scores = []
+    @rolls = []
+    do_rolls
+    get_scores
+    puts &#39;rolls:&#39;
+    puts rolls
+    puts &#39;frame scores&#39;
+    puts frame_scores
+  end
+
+  def do_rolls<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="frame.html#L18" class="js-smell-location">0</a>                  <a href="game.html#L18" class="js-smell-location">1</a>                  </div>  </li></ol>
+    10.times do
+      first_roll = rand(0..10)
+      rolls.push(first_roll)
+      if first_roll != 10 then rolls.push(rand(0..(10 - first_roll))) end
+    end
+  end
+
+  def extra_roll
+    roll = rand(0..10)
+    rolls.push(roll)
+    puts &quot;extra roll&quot;
+    roll
+  end
+
+  def get_scores<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Frame#get_scores has a flog score of 50</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Frame#get_scores has approx 10 statements</span>          </div>  </li></ol>
+    roll_count = 0
+    score = 0
+    (0..9).each do |frame_count|
+      if rolls[roll_count] == 10 # Strike!<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'rolls[roll_count]' 3 times</span>              <span>Locations:</span>                  <a href="frame.html#L37" class="js-smell-location">0</a>                  <a href="frame.html#L40" class="js-smell-location">1</a>                  <a href="frame.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+        score += strike_score(roll_count)
+        roll_count += 1
+      elsif (rolls[roll_count] + rolls[roll_count + 1] == 10)# Spare!<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'roll_count + 1' 2 times</span>              <span>Locations:</span>                  <a href="frame.html#L40" class="js-smell-location">0</a>                  <a href="frame.html#L44" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="frame.html#L40" class="js-smell-location">0</a>                  <a href="frame.html#L44" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'rolls[roll_count] + rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="frame.html#L40" class="js-smell-location">0</a>                  <a href="frame.html#L44" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'rolls[roll_count]' 3 times</span>              <span>Locations:</span>                  <a href="frame.html#L37" class="js-smell-location">0</a>                  <a href="frame.html#L40" class="js-smell-location">1</a>                  <a href="frame.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+        score += spare_score(roll_count)
+        roll_count += 2
+      else
+        score += rolls[roll_count] + rolls[roll_count + 1]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'roll_count + 1' 2 times</span>              <span>Locations:</span>                  <a href="frame.html#L40" class="js-smell-location">0</a>                  <a href="frame.html#L44" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="frame.html#L40" class="js-smell-location">0</a>                  <a href="frame.html#L44" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'rolls[roll_count] + rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="frame.html#L40" class="js-smell-location">0</a>                  <a href="frame.html#L44" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Frame#get_scores calls 'rolls[roll_count]' 3 times</span>              <span>Locations:</span>                  <a href="frame.html#L37" class="js-smell-location">0</a>                  <a href="frame.html#L40" class="js-smell-location">1</a>                  <a href="frame.html#L44" class="js-smell-location">2</a>                  </div>  </li></ol>
+        roll_count += 2
+      end
+      frame_scores[frame_count] = score
+    end
+  end
+
+  def strike_score(roll_count)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="frame.html#L51" class="js-smell-location">0</a>                  <a href="game.html#L72" class="js-smell-location">1</a>                  </div>  </li></ol>
+    score = rolls[roll_count]
+    score += rolls[roll_count + 1]   || extra_roll
+    score += rolls[roll_count + 2]   || extra_roll
+  end
+
+  def spare_score(roll_count)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="frame.html#L57" class="js-smell-location">0</a>                  <a href="game.html#L78" class="js-smell-location">1</a>                  </div>  </li></ol>
+    score = rolls[roll_count] + rolls[roll_count + 1]
+    score += rolls[roll_count + 2] || extra_roll
   end
 end
+
+Frame.new
 </code>
   </div>
 </div>

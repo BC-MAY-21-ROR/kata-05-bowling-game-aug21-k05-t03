@@ -47,12 +47,12 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2021-09-08 19:07:20 -0500'>2021-09-08 19:07:20 -0500</time>
+          Never committed
         
       </span>
     </div>
     <div>
-      <h3><small>app /</small> app.rb</h3>
+      <h3><small>spec /</small> game_spec.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">9</span><small> lines of codes</small></div>
+              <div><span class="metric">24</span><small> lines of codes</small></div>
               <div><span class="metric">0</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">N/A</span><small> complexity/method</small></div>
-              <div><span class="metric">2</span><small> churn</small></div>
+              <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">0.0</span><small> complexity</small></div>
+              <div><span class="metric">40.95</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -97,14 +97,29 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;./app/game.rb&#39;
+require &#39;spec_helper&#39;
 
-require_relative &#39;game&#39;
-# frozen_string_literal: true
-
-# This is the App Class
-class App
-  Game.new.start
+describe Game  do
+  before do
+    @game = Game.new
+  end
+  context &quot;do_rolls store and array of numbers in rolls&quot; do
+    it &quot;it return 10&quot; do
+      expect(@game.do_rolls).to eq 10
+    end
+    it &quot;it doesn&#39;t return nothing from 10&quot; do
+      expect(@game.do_rolls).not_to eq !10
+    end
+    it &quot;it changes rolls from empty&quot; do
+      @game.do_rolls
+      expect(@game.rolls).not_to eq []
+    end
+    it &quot;it fill rolls array with numbers&quot; do
+      @game.do_rolls
+      expect(@game.rolls).to all( be_an(Integer))
+    end
+  end
 end
 </code>
   </div>

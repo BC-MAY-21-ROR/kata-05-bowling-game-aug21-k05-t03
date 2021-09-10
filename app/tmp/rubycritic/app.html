@@ -62,21 +62,21 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating c big">
-              C
+            <div class="rating a big">
+              A
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">64</span><small> lines of codes</small></div>
-              <div><span class="metric">6</span><small> methods</small></div>
+              <div><span class="metric">9</span><small> lines of codes</small></div>
+              <div><span class="metric">0</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">18.7</span><small> complexity/method</small></div>
+              <div><span class="metric">N/A</span><small> complexity/method</small></div>
               <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">112.23</span><small> complexity</small></div>
+              <div><span class="metric">0.0</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,8 +88,8 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                6
-                smells
+                0
+                smell
               </a>
             </li>
           </ul>
@@ -99,68 +99,13 @@
 
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
 
-require_relative &#39;frame&#39;
+require_relative &#39;game&#39;
 # frozen_string_literal: true
 
 # This is the App Class
 class App
-  attr_reader :frame_scores, :rolls
-
-  def initialize
-    @frame_scores = []
-    @rolls = []
-    do_rolls
-    get_scores
-    puts &#39;rolls:&#39;
-    puts rolls
-    puts &#39;frame scores&#39;
-    puts frame_scores
-  end
-
-  def do_rolls
-    10.times do |_i|
-      first_roll = rand(0..10)
-      rolls.push(first_roll)
-      first_roll != 10 ? rolls.push(rand(0..(10 - first_roll))) : ()
-      get_scores
-    end
-  end
-
-  def extra_roll
-    rand(0..10)
-  end
-
-  def get_scores<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>App#get_scores has a flog score of 52</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>App#get_scores has approx 9 statements</span>          </div>  </li></ol>
-    roll_count = 0
-    frame_count = 0
-    while roll_count &lt; rolls.length
-      if rolls[roll_count] == 10 # Strike!<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'rolls[roll_count]' 3 times</span>              <span>Locations:</span>                  <a href="app.html#L38" class="js-smell-location">0</a>                  <a href="app.html#L41" class="js-smell-location">1</a>                  <a href="app.html#L45" class="js-smell-location">2</a>                  </div>  </li></ol>
-        frame_scores[frame_count] = strike_score(roll_count)
-        roll_count += 1
-      elsif rolls[roll_count] + rolls[roll_count + 1] == 10 # Spare!<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'roll_count + 1' 2 times</span>              <span>Locations:</span>                  <a href="app.html#L41" class="js-smell-location">0</a>                  <a href="app.html#L45" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="app.html#L41" class="js-smell-location">0</a>                  <a href="app.html#L45" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'rolls[roll_count] + rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="app.html#L41" class="js-smell-location">0</a>                  <a href="app.html#L45" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'rolls[roll_count]' 3 times</span>              <span>Locations:</span>                  <a href="app.html#L38" class="js-smell-location">0</a>                  <a href="app.html#L41" class="js-smell-location">1</a>                  <a href="app.html#L45" class="js-smell-location">2</a>                  </div>  </li></ol>
-        frame_scores[frame_count] = spare_score(roll_count)
-        roll_count += 2
-      else
-        frame_scores[frame_count] = rolls[roll_count] + rolls[roll_count + 1]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'roll_count + 1' 2 times</span>              <span>Locations:</span>                  <a href="app.html#L41" class="js-smell-location">0</a>                  <a href="app.html#L45" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="app.html#L41" class="js-smell-location">0</a>                  <a href="app.html#L45" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'rolls[roll_count] + rolls[roll_count + 1]' 2 times</span>              <span>Locations:</span>                  <a href="app.html#L41" class="js-smell-location">0</a>                  <a href="app.html#L45" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>App#get_scores calls 'rolls[roll_count]' 3 times</span>              <span>Locations:</span>                  <a href="app.html#L38" class="js-smell-location">0</a>                  <a href="app.html#L41" class="js-smell-location">1</a>                  <a href="app.html#L45" class="js-smell-location">2</a>                  </div>  </li></ol>
-        roll_count += 2
-      end
-      frame_count += 1
-    end
-  end
-
-  def strike_score(roll_count)
-    score = rolls[roll_count]
-    score += rolls[roll_count + 1]   || extra_roll
-    score += rolls[roll_count + 2]   || extra_roll
-  end
-
-  def spare_score(roll_count)
-    score = rolls[roll_count] + rolls[roll_count + 1]
-    score += rolls[roll_count + 2] || extra_roll
-  end
+  Game.new.start
 end
-
-App.new
 </code>
   </div>
 </div>
